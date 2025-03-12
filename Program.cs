@@ -16,12 +16,14 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseRouting();
 app.UseAuthorization();
-app.MapControllers();
 
-app.Run(async (context) =>
+app.UseEndpoints(endpoints =>
 {
-    await context.Response.WriteAsync("Hello world!");
+    endpoints.MapControllers();
 });
+
+app.MapControllers();
 
 app.Run();
