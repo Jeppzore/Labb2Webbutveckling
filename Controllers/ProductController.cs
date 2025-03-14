@@ -5,8 +5,8 @@ using MongoDB.Driver;
 
 namespace Labb2Webbutveckling.Controllers
 {
-    [Route("api/products")]
     [ApiController]
+    [Route("api/products")]
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _repository;
@@ -40,6 +40,18 @@ namespace Labb2Webbutveckling.Controllers
         {
             await _repository.AddAsync(product);
             return CreatedAtAction(nameof(GetById), new { id = product.Id}, product);
+        }
+
+        [HttpPatch("{id}/unavailable")]
+        public async Task<IActionResult> MarkAsUnavailable(string id)
+        {
+            var updated = await _repository.MarkProductAsUnavailable(id);
+            if (!updated)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
 
         [HttpPut("{id}")]

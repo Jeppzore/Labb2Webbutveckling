@@ -38,5 +38,14 @@ namespace Labb2Webbutveckling.Repositories
         {
             await _products.ReplaceOneAsync(p => p.Id == product.Id, product);
         }
+
+        public async Task<bool> MarkProductAsUnavailable(string id)
+        {
+            var filter = Builders<Product>.Filter.Eq(p => p.Id, id);
+            var update = Builders<Product>.Update.Set(p => p.Status, ProductStatus.Unavailable);
+
+            var result = await _products.UpdateOneAsync(filter, update);
+            return result.ModifiedCount > 0;
+        }
     }
 }
