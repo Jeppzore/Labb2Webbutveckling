@@ -1,14 +1,27 @@
+using MongoDB.Driver;
+using Microsoft.OpenApi.Models;
+using Labb2Webbutveckling.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// Configure MongoDB-connection
+var mongoClient = new MongoClient("mongodb://localhost:27017");
+var database = mongoClient.GetDatabase("ECommerceDb");
+
+builder.Services.AddSingleton<IMongoDatabase>(database);
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 builder.Services.AddControllers();
+
+// Swagger & OpenAPI
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "E-Commerce API", Version = "v1"});
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -16,14 +29,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseRouting();
 app.UseAuthorization();
-
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllers();
-});
-
 app.MapControllers();
 
 app.Run();
