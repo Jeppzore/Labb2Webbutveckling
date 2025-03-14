@@ -19,6 +19,9 @@ namespace Labb2Webbutveckling.Models
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; }
         public string Category { get; set; } = string.Empty;
+
+        // Make the enum stored as a String to better clarify the status of the Product
+        [BsonRepresentation(BsonType.String)]
         public ProductStatus Status { get; set; } = ProductStatus.Available;
     }
 }
