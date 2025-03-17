@@ -6,24 +6,31 @@ namespace Labb2Webbutveckling.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
-        public Task AddAsync(Customer customer)
+        private readonly IMongoCollection<Customer> _customers;
+
+        public CustomerRepository(IMongoDatabase database)
         {
-            throw new NotImplementedException();
+            _customers = database.GetCollection<Customer>("Customers");
         }
 
-        public Task<List<Customer>> GetAllAsync()
+        public async Task AddAsync(Customer customer)
         {
-            throw new NotImplementedException();
+            await _customers.InsertOneAsync(customer);
         }
 
-        public Task<Customer> GetByEmailAsync(string email)
+        public async Task<List<Customer>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _customers.Find(_ => true).ToListAsync();
         }
 
-        public Task UpdateAsync(Customer customer)
+        public async Task<Customer> GetByEmailAsync(string email)
         {
-            throw new NotImplementedException();
+            return await _customers.Find(c => c.Email == email).FirstOrDefaultAsync();
+        }
+
+        public async Task UpdateAsync(Customer customer)
+        {
+            await _customers.ReplaceOneAsync(c => c.Email == customer.Email, customer);
         }
     }
 }

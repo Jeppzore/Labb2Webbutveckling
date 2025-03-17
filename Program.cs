@@ -10,6 +10,7 @@ var database = mongoClient.GetDatabase("ECommerceDb");
 
 builder.Services.AddSingleton<IMongoDatabase>(database);
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
 builder.Services.AddControllers();
 
