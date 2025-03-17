@@ -11,6 +11,7 @@ namespace Labb2Webbutveckling.Controllers
     {
         private readonly IProductRepository _repository;
 
+        // Constructor
         public ProductController(IProductRepository repository)
         {
             _repository = repository;

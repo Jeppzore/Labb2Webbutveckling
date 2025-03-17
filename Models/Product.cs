@@ -9,6 +9,14 @@ namespace Labb2Webbutveckling.Models
         Unavailable
     }
 
+    public enum ProductCategory
+    {
+        Clothes,
+        Electronics,
+        Food,
+        Other
+    }
+
     public class Product
     {
         [BsonId]
@@ -18,9 +26,11 @@ namespace Labb2Webbutveckling.Models
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public decimal Price { get; set; }
-        public string Category { get; set; } = string.Empty;
 
         // Make the enum stored as a String to better clarify the status of the Product
+        [BsonRepresentation(BsonType.String)]
+        public ProductCategory Category { get; set; } = ProductCategory.Other;
+        
         [BsonRepresentation(BsonType.String)]
         public ProductStatus Status { get; set; } = ProductStatus.Available;
     }
