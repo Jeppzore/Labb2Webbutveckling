@@ -55,6 +55,18 @@ namespace Labb2Webbutveckling.Controllers
             return NoContent();
         }
 
+        [HttpPatch("{id}/available")]
+        public async Task<IActionResult> MarkAsAvailable(string id)
+        {
+            var updated = await _repository.MarkProductAsAvailable(id);
+            if (!updated)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, Product updatedProduct)
         {

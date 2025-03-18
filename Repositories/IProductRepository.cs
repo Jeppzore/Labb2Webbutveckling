@@ -10,5 +10,7 @@ namespace Labb2Webbutveckling.Repositories
         Task UpdateAsync(Product product);
         Task DeleteAsync(string id);
         Task<bool> MarkProductAsUnavailable(string id);
+        Task<bool> MarkProductAsAvailable(string id);
+
     }
 }
