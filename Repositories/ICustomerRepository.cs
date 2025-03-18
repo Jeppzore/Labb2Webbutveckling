@@ -9,5 +9,6 @@ namespace Labb2Webbutveckling.Repositories
         Task<Customer> GetByEmailAsync(string email);
         Task UpdateAsync(Customer customer);
         Task AddAsync(Customer customer);      
+        Task EnsureIndexesAsync();
     }
 }
