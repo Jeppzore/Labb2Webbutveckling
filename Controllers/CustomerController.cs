@@ -1,6 +1,8 @@
+using System.Linq.Expressions;
 using Labb2Webbutveckling.Models;
 using Labb2Webbutveckling.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 
 namespace Labb2Webbutveckling.Controllers
 {
@@ -23,7 +25,7 @@ namespace Labb2Webbutveckling.Controllers
             return Ok(customers);
         }
 
-        [HttpGet("{e-mail}")]
+        [HttpGet("{email}")]
         public async Task<IActionResult> GetByEmail(string email)
         {
             var customer = await _repository.GetByEmailAsync(email);
@@ -38,11 +40,32 @@ namespace Labb2Webbutveckling.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Customer customer)
         {
-            await _repository.AddAsync(customer);
-            return CreatedAtAction(nameof(GetByEmail), new { id = customer.Id }, customer);
-        }
+            try
+            { 
+                await _repository.AddAsync(customer);
 
-        [HttpPut("{e-mail}")]
+                // Fetch the newly created customer to ensure ID is correctly assigned
+                var createdCustomer = await _repository.GetByEmailAsync(customer.Email!);
+                if (createdCustomer == null)
+                {
+                    return StatusCode(500, "Customer was created but could not be retrieved");
+                }
+
+                return CreatedAtAction(nameof(GetByEmail), new { email = createdCustomer.Email }, createdCustomer);
+            }
+            // Return error message when customer tries to create an user with an already registered email
+            catch (MongoWriteException ex) when (ex.WriteError.Category == ServerErrorCategory.DuplicateKey)
+            {
+                return Conflict("A customer with this email already exists.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+        
+
+        [HttpPut("{email}")]
         public async Task<IActionResult> Update(string email, Customer updatedCustomer)
         {
             var existingCustomer = await _repository.GetByEmailAsync(email);

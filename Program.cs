@@ -8,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 var mongoClient = new MongoClient("mongodb://localhost:27017");
 var database = mongoClient.GetDatabase("ECommerceDb");
 
+// Called once and ensures each customer has an unique email.
+var customerRepository = new CustomerRepository(database);
+await customerRepository.EnsureIndexesAsync();
+
 builder.Services.AddSingleton<IMongoDatabase>(database);
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();

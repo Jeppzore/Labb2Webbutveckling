@@ -32,5 +32,14 @@ namespace Labb2Webbutveckling.Repositories
         {
             await _customers.ReplaceOneAsync(c => c.Email == customer.Email, customer);
         }
+
+        public async Task EnsureIndexesAsync()
+        {
+            var indexKeys = Builders<Customer>.IndexKeys.Ascending(c => c.Email);
+            var indexOptions = new CreateIndexOptions { Unique = true };
+            var indexModel = new CreateIndexModel<Customer>(indexKeys, indexOptions);
+
+            await _customers.Indexes.CreateOneAsync(indexModel);
+        }
     }
 }
