@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using System.Text.Json;
 using Labb2Webbutveckling.Models;
 using Labb2Webbutveckling.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,13 @@ namespace Labb2Webbutveckling.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Customer customer)
         {
+            Console.WriteLine("Received customer: " + JsonSerializer.Serialize(customer, new JsonSerializerOptions { WriteIndented = true }));
+
+            if (string.IsNullOrWhiteSpace(customer.FirstName))
+            {
+                return BadRequest("First Name is required");
+            }
+
             try
             { 
                 await _repository.AddAsync(customer);
