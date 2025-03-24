@@ -7,7 +7,7 @@ namespace Labb2Webbutveckling.Repositories
         Task<List<Order>> GetAllAsync();
         Task<Order> GetByIdAsync(string id);
         Task<List<Order>> GetByCustomerIdAsync(string customerId);
-        Task AddAsync(Order order);
+        Task<Order> AddAsync(Order order);
         Task<bool> UpdateStatusAsync(string id, string status);
     }
 }

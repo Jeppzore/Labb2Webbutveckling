@@ -23,4 +23,9 @@ namespace Labb2Webbutveckling.Models
         public string ProductId { get; set; } = null!;
         public int Quantity { get; set; }
     }
+    
+    public class UpdateStatusRequest
+    {
+        public string Status { get; set; } = "";
+    }
 }

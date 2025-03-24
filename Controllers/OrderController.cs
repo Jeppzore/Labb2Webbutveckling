@@ -9,9 +9,9 @@ namespace Labb2Webbutveckling.Controllers
     [Route("api/orders")]
     public class OrderController : ControllerBase
     {
-        private readonly OrderRepository _repository;
+        private readonly IOrderRepository _repository;
 
-        public OrderController(OrderRepository repository)
+        public OrderController(IOrderRepository repository)
         {
             _repository = repository;
         }
@@ -35,17 +35,29 @@ namespace Labb2Webbutveckling.Controllers
             return Ok(order);
         }
 
-        [HttpGet("custuomer/{customerId}")]
+        [HttpGet("customer/{customerId}")]
         public async Task<ActionResult<List<Order>>> GetOrdersByCustomerId(string customerId)
         {
             var orders = await _repository.GetByCustomerIdAsync(customerId);
             return Ok(orders);
         }
 
-        [HttpPost("{id}/status")]
-        public async Task<ActionResult> UpdateOrderStatus(string id, [FromBody] string status)
+        [HttpPost]
+        public async Task<ActionResult<Order>> CreateOrder([FromBody] Order order)
         {
-            var success = await _repository.UpdateStatusAsync(id, status);
+            if (order == null)
+            {
+                return BadRequest("Invalid order data.");
+            }
+
+            await _repository.AddAsync(order);
+            return CreatedAtAction(nameof(GetOrderById), new { id = order.Id }, order);
+        }
+
+        [HttpPost("{id}/status")]
+        public async Task<ActionResult> UpdateOrderStatus(string id, [FromBody] UpdateStatusRequest request)
+        {
+            var success = await _repository.UpdateStatusAsync(id, request.Status);
             if (!success)
             {
                 return NotFound("Order not found");

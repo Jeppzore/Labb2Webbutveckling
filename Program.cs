@@ -15,6 +15,7 @@ await customerRepository.EnsureIndexesAsync();
 builder.Services.AddSingleton<IMongoDatabase>(database);
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
 
 builder.Services.AddControllers();
 
