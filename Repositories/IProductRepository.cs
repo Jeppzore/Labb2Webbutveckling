@@ -6,6 +6,7 @@ namespace Labb2Webbutveckling.Repositories
     {
         Task<List<Product>> GetAllAsync();
         Task<Product> GetByIdAsync(string id);
+        Task<Product> GetByNameAsync(string name);
         Task AddAsync(Product product);
         Task UpdateAsync(Product product);
         Task DeleteAsync(string id);

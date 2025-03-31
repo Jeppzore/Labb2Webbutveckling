@@ -24,10 +24,22 @@ namespace Labb2Webbutveckling.Controllers
             return Ok(products);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("id/{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             var product = await _repository.GetByIdAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(product);
+        }
+
+        [HttpGet("name/{name}")]
+        public async Task<IActionResult> GetByName(string name)
+        {
+            var product = await _repository.GetByNameAsync(name);
             if (product == null)
             {
                 return NotFound();

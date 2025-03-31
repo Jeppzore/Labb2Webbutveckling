@@ -33,6 +33,10 @@ namespace Labb2Webbutveckling.Repositories
         {
             return await _products.Find(p => p.Id == id).FirstOrDefaultAsync();
         }
+        public async Task<Product> GetByNameAsync(string name)
+        {
+            return await _products.Find(p => p.Name == name).FirstOrDefaultAsync();
+        }
 
         public async Task UpdateAsync(Product product)
         {
@@ -56,5 +60,6 @@ namespace Labb2Webbutveckling.Repositories
             var result = await _products.UpdateOneAsync(filter, update);
             return result.ModifiedCount > 0;
         }
+
     }
 }
