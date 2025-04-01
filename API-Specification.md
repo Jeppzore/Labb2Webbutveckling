@@ -217,7 +217,7 @@ Retrieves a specific product based on its NAME.
 ---
 
 ## Contact
-For any inquiries regarding the API specification, please contact the IT department at Länsstyrelsen.
+For any inquiries regarding the API specification, please contact me
 
 
 
