@@ -11,3 +11,5 @@ Using Blazor, which is connected to the REST API
 Users will be able to register with their information (name, email, adress etc.) The user's information will be sent to the database.
 Users can update their information using their applied email-adress.
 
+*API-SPECIFICATION*
+Please read the file "API-Specification.md" for the available endpoints.
