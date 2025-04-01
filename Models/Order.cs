@@ -11,7 +11,7 @@ namespace Labb2Webbutveckling.Models
 
         [BsonRepresentation(BsonType.ObjectId)]
         public string CustomerId { get; set; } = null!;
-        public List<OrderItem> Products { get; set; } = new();
+        public List<OrderItem> Items { get; set; } = new();
         public decimal TotalPrice { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.UtcNow;
         public string Status { get; set; } = "Pending";
