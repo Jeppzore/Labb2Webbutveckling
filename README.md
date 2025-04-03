@@ -13,7 +13,7 @@ Frontend: Blazor application that allows users to register, update personal deta
 ## Getting Started
 Follow these steps to set up and run the project locally:
 
-1. **Set Up the API**
+**1. Set Up the API**
 Clone the API repository: https://github.com/Jeppzore/Labb2Webbutveckling.git
 
 **Set up a local MongoDB database:**
@@ -32,7 +32,7 @@ Clone the API repository: https://github.com/Jeppzore/Labb2Webbutveckling.git
 - Open the project in Visual Studio.
 - Run the Blazor app from Visual Studio.
 
-3. **Testing the Application**
+**3. Testing the Application**
 Once both the API and Blazor frontend are running, you can interact with the API directly via the Blazor interface.
 
 Navigate through the navbar to access different features such as Product Management, Customer Registration, and Order Placement.
