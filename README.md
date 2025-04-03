@@ -16,13 +16,13 @@ Follow these steps to set up and run the project locally:
 **1. Set Up the API**
 Clone the API repository: https://github.com/Jeppzore/Labb2Webbutveckling.git
 
-**Set up a local MongoDB database:**
+*Set up a local MongoDB database:*
 
 - Ensure MongoDB is installed and running.
 - You can start a local MongoDB instance using: mongosh
 - The API connects to a database named ECommerceDb.
 
-**Run the API:**
+*Run the API:*
 - Open the project in VS Code.
 - Start the API in the terminal with: dotnet run (view -> terminal)
 - Ensure the API is running at: **http://localhost:5139**
@@ -33,9 +33,9 @@ Clone the API repository: https://github.com/Jeppzore/Labb2Webbutveckling.git
 - Run the Blazor app from Visual Studio.
 
 **3. Testing the Application**
-Once both the API and Blazor frontend are running, you can interact with the API directly via the Blazor interface.
+- Once both the API and Blazor frontend are running, you can interact with the API directly via the Blazor interface.
 
-Navigate through the navbar to access different features such as Product Management, Customer Registration, and Order Placement.
+- Navigate through the navbar to access different features such as Product Management, Customer Registration, and Order Placement.
 
 ---
 ## API Specification
