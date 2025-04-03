@@ -19,7 +19,7 @@ Follow these steps to set up and run the project locally:
 *Set up a local MongoDB database:*
 
 - Ensure MongoDB is installed and running.
-- You can start a local MongoDB instance using: mongosh
+- You can start a local MongoDB instance using: mongosh (in shell)
 - The API connects to a database named ECommerceDb.
 
 *Run the API:*
@@ -40,4 +40,4 @@ Follow these steps to set up and run the project locally:
 ---
 ## API Specification
 For details on available API endpoints and how to interact with them, please refer to:
-📄 ==API-Specification.md==
+**📄 API-Specification.md** (https://github.com/Jeppzore/Labb2Webbutveckling/blob/main/API-Specification.md)
