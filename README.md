@@ -14,7 +14,7 @@ Frontend: Blazor application that allows users to register, update personal deta
 Follow these steps to set up and run the project locally:
 
 **1. Set Up the API**
-Clone the API repository: https://github.com/Jeppzore/Labb2Webbutveckling.git
+- Clone the API repository: https://github.com/Jeppzore/Labb2Webbutveckling.git
 
 *Set up a local MongoDB database:*
 
